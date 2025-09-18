@@ -1,52 +1,23 @@
 
-import React, { useEffect, useState } from 'react';
-
-import UserCard from './components/UserCard';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navigation from './components/Navigation';
+import Assignment1 from './components/pages/Assignment1';
+import Assignment2 from './components/pages/Assignment2';
+import 'antd/dist/reset.css';
 import './App.css';
-import './spinkit.css';
 
 function App() {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then((res) => res.json())
-      .then((data) => {
-        setUsers(data);
-        setLoading(false);
-      });
-  }, []);
-
   return (
-    <div className="container mt-5">
-      <h1 className="mb-4 text-center">User Profiles</h1>
-      {loading ? (
-        <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '50vh' }}>
-          {/* SpinKit spinner: simple CSS spinner */}
-          <div className="sk-chase">
-            <div className="sk-chase-dot"></div>
-            <div className="sk-chase-dot"></div>
-            <div className="sk-chase-dot"></div>
-            <div className="sk-chase-dot"></div>
-            <div className="sk-chase-dot"></div>
-            <div className="sk-chase-dot"></div>
-          </div>
-        </div>
-      ) : (
-        <div className="row">
-          {users.map((user) => (
-            <div className="col-md-4" key={user.id}>
-              <UserCard
-                user={user}
-                // avatarUrl={`https://api.dicebear.com/6.x/avataaars/svg?seed=${user.username}&mood=happy`}
-                avatarUrl={`https://api.dicebear.com/6.x/avataaars/svg?seed=${user.username}&mood=happy`}
-              />
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
+    <Router>
+      <div className="App">
+        <Navigation />
+        <Routes>
+          <Route path="/" element={<Assignment1 />} />
+          <Route path="/assignment2" element={<Assignment2 />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
