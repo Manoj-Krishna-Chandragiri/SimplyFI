@@ -39,6 +39,7 @@ function App() {
             <div className="col-md-4" key={user.id}>
               <UserCard
                 user={user}
+                // avatarUrl={`https://api.dicebear.com/6.x/avataaars/svg?seed=${user.username}&mood=happy`}
                 avatarUrl={`https://api.dicebear.com/6.x/avataaars/svg?seed=${user.username}&mood=happy`}
               />
             </div>
